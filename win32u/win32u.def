@@ -1,0 +1,6 @@
+LIBRARY        WIN32U
+DESCRIPTION    "WIN32U"
+
+EXPORTS
+    NtUserMsgWaitForMultipleObjectsEx
+    NtUserPeekMessage
