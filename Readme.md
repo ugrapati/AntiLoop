@@ -33,8 +33,8 @@ The correct message loop must consist of two threads:
 
 Nobody implements it correctly. QT4/QT5 and .NET are among the worst offenders. Games like TESO call Sleep(0) a million times per second.
 
-They both do everything in a single thread. .NET only sleeps for some time between PeekMessage() calls if the dialog does not have any timing events in it.
-If it does, it loops wasting huge amounts of CPU time and performing hundreds of thousands, even millions of calls to get the current time every second.
+Everyone seems to try to process both, Windows messages and timing events, in a single thread. .NET only sleeps for some time between PeekMessage() calls if the dialog does not have any timing events in it.
+If it does, it loops endlessly wasting huge amounts of CPU time and performing hundreds of thousands, even millions of calls to get the current time every second.
 
 
 
@@ -46,3 +46,5 @@ Current issues:
 
 I have no money to pay for a proper certificate and I can't do it without knowing first that it will work.
 It's better to require a signature for all the DLLs in AppInit_DLLs. RequireSignedAppInit_DLLs should be set to 1. It doesn't work yet.
+
+TODO: Inject a thread into processes that refuse to load AntiLoop DLL. It can be easily implemented by hooking NtCreateProcess and NtCreateProcessEx.
