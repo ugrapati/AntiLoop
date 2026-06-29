@@ -31,7 +31,7 @@ The correct message loop must consist of two threads:
     1. WaitMessage() looped - sleeping until the next Windows message
     2. NtDelayExecution(0,&ticks64) - sleeping until the next timing event
 
-Nobody does it correctly. Among the worst offenders are: QT4/QT5 and .NET
+Nobody implements it correctly. QT4/QT5 and .NET are among the worst offenders. Games like TESO call Sleep(0) a million times per second.
 
 They both do everything in a single thread. .NET only sleeps for some time between PeekMessage() calls if the dialog does not have any timing events in it.
 If it does, it loops wasting huge amounts of CPU time and performing hundreds of thousands, even millions of calls to get the current time every second.
